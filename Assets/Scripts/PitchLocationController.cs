@@ -61,35 +61,47 @@ public class PitchLocationController : MonoBehaviour
         groundTilemap.SetTileFlags(coordinates3d, TileFlags.None);
         groundTilemap.SetColor(coordinates3d, colorMap[coordinates.x % 2, coordinates.y % 2]);
 
-        // TODO LOS
-        // TODO endzones
-        // TODO angles -> 2 layers
-        // TODO hardcode -> const, calculées
-        if (pitchLocation.Coordinates.x == 3 ||
-            pitchLocation.Coordinates.x == 4 ||
-            pitchLocation.Coordinates.x == 10 ||
-            pitchLocation.Coordinates.x == 11)
+        // Draw vertical lines
+        if (pitchLocation.Coordinates.x == Pitch.WidezoneLeftEnd ||
+            pitchLocation.Coordinates.x == Pitch.WidezoneLeftEnd + 1 ||
+            pitchLocation.Coordinates.x == Pitch.WidezoneRightStart ||
+            pitchLocation.Coordinates.x == Pitch.WidezoneRightStart + 1)
         {
             groundDecorationTilemap1.SetTile(coordinates3d, lineTile);
             groundDecorationTilemap1.SetTileFlags(coordinates3d, TileFlags.None);
 
-            if (pitchLocation.Coordinates.x == 4 ||
-                pitchLocation.Coordinates.x == 11)
+            if (pitchLocation.Coordinates.x == Pitch.WidezoneLeftEnd + 1 ||
+                pitchLocation.Coordinates.x == Pitch.WidezoneRightStart + 1)
             {
                 rotateTile(groundDecorationTilemap1, coordinates3d, 180);
             }
         }
 
+        // Draw horizontal lines
+        // TODO hardcode -> const, calculées
         if (pitchLocation.BelongsEndZone ||
             pitchLocation.Coordinates.y == 1 ||
-            pitchLocation.Coordinates.y == 24)
+            pitchLocation.Coordinates.y == 12 ||
+            pitchLocation.Coordinates.y == 13 ||
+            pitchLocation.Coordinates.y == Pitch.Height -2)
         {
             groundDecorationTilemap2.SetTile(coordinates3d, lineTile);
             groundDecorationTilemap2.SetTileFlags(coordinates3d, TileFlags.None);
 
+            if (pitchLocation.BelongsEndZoneBottom ||
+                pitchLocation.Coordinates.y == 12 ||
+                pitchLocation.Coordinates.y == Pitch.Height - 2)
+            {
+                rotateTile(groundDecorationTilemap2, coordinates3d, 90);
+            }
+            else
+            {
+                rotateTile(groundDecorationTilemap2, coordinates3d, 270);
+            }
 
         }
 
+        // Draw trapdoors
         if (pitchLocation.HasTrapDoor)
         {
             // TODO trapdoor sprite
