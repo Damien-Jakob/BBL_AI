@@ -5,7 +5,10 @@ public class Pitch
     public static readonly int Width = 15;
     public static readonly int Height = 26;
     public static readonly int WideZoneWidth = 4;
-    // TODO WidezoneLeftEnd, WidezoneRightStart
+    public static readonly int WidezoneLeftEnd = WideZoneWidth - 1;
+    public static readonly int WidezoneRightStart = Width - WideZoneWidth;
+    public static readonly int TopStart = Height / 2;
+    public static readonly int BottomEnd = TopStart -1;
 
     public static readonly Vector2Int TrapDoor1Location = new Vector2Int(1, 6);
     public static readonly Vector2Int TrapDoor2Location = new Vector2Int(13, 19);
