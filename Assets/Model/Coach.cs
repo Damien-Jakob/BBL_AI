@@ -1,5 +1,8 @@
-﻿abstract class Coach
+﻿namespace Assets.Model
 {
+    abstract class Coach
+    {
 
+    }
 }
 

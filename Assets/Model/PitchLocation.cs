@@ -1,97 +1,100 @@
 ﻿using UnityEngine;
 
-public class PitchLocation
+namespace Assets.Model
 {
-    protected readonly Vector2Int coordinates;
-    protected readonly bool hasTrapDoor;
-
-    protected Pitch pitch;
-
-    public PitchLocation(int x, int y, Pitch pitch)
+    public class PitchLocation
     {
-        coordinates = new Vector2Int(x, y);
-        hasTrapDoor = (coordinates == Pitch.TrapDoor1Location)
-            || (coordinates == Pitch.TrapDoor2Location);
-        this.pitch = pitch;
-    }
+        protected readonly Vector2Int coordinates;
+        protected readonly bool hasTrapDoor;
 
-    public Vector2Int Coordinates
-    {
-        get { return coordinates; }
-    }
+        protected Pitch pitch;
 
-    public bool BelongsBottom
-    {
-        get { return Coordinates.x < 13; }
-    }
+        public PitchLocation(int x, int y, Pitch pitch)
+        {
+            coordinates = new Vector2Int(x, y);
+            hasTrapDoor = (coordinates == Pitch.TrapDoor1Location)
+                || (coordinates == Pitch.TrapDoor2Location);
+            this.pitch = pitch;
+        }
 
-    public bool BelongsTop
-    {
-        get { return !BelongsBottom; }
-    }
+        public Vector2Int Coordinates
+        {
+            get { return coordinates; }
+        }
 
-    public bool BelongsEndZoneBottom
-    {
-        get { return Coordinates.y == 0; }
-    }
+        public bool BelongsBottom
+        {
+            get { return Coordinates.x < 13; }
+        }
 
-    public bool BelongsEndZoneTop
-    {
-        get { return Coordinates.y == Pitch.Height - 1; }
-    }
+        public bool BelongsTop
+        {
+            get { return !BelongsBottom; }
+        }
 
-    public bool BelongsEndZone
-    {
-        get { return BelongsEndZoneBottom || BelongsEndZoneTop; }
-    }
+        public bool BelongsEndZoneBottom
+        {
+            get { return Coordinates.y == 0; }
+        }
 
-    public bool BelongsWideZoneRight
-    {
-        get { return Coordinates.x < Pitch.WideZoneWidth; }
-    }
+        public bool BelongsEndZoneTop
+        {
+            get { return Coordinates.y == Pitch.Height - 1; }
+        }
 
-    public bool BelongsWideZoneLeft
-    {
-        get { return Coordinates.x >= 11; }
-    }
+        public bool BelongsEndZone
+        {
+            get { return BelongsEndZoneBottom || BelongsEndZoneTop; }
+        }
 
-    public bool BelongsWideZone
-    {
-        get { return BelongsWideZoneLeft || BelongsWideZoneRight; }
-    }
+        public bool BelongsWideZoneRight
+        {
+            get { return Coordinates.x < Pitch.WideZoneWidth; }
+        }
 
-    public bool BelongsWideZoneBottom
-    {
-        get { return BelongsWideZone && BelongsBottom; }
-    }
+        public bool BelongsWideZoneLeft
+        {
+            get { return Coordinates.x >= 11; }
+        }
 
-    public bool BelongsWideZoneTop
-    {
-        get { return BelongsWideZone && BelongsTop; }
-    }
+        public bool BelongsWideZone
+        {
+            get { return BelongsWideZoneLeft || BelongsWideZoneRight; }
+        }
 
-    public bool BelongsWideZoneBottomRight
-    {
-        get { return BelongsWideZoneRight && BelongsBottom; }
-    }
+        public bool BelongsWideZoneBottom
+        {
+            get { return BelongsWideZone && BelongsBottom; }
+        }
 
-    public bool BelongsWideZoneTopight
-    {
-        get { return BelongsWideZoneRight && BelongsTop; }
-    }
+        public bool BelongsWideZoneTop
+        {
+            get { return BelongsWideZone && BelongsTop; }
+        }
 
-    public bool BelongsWideZoneBottomLeft
-    {
-        get { return BelongsWideZoneLeft && BelongsBottom; }
-    }
+        public bool BelongsWideZoneBottomRight
+        {
+            get { return BelongsWideZoneRight && BelongsBottom; }
+        }
 
-    public bool BelongsWideZoneTopLeft
-    {
-        get { return BelongsWideZoneLeft && BelongsTop; }
-    }
+        public bool BelongsWideZoneTopight
+        {
+            get { return BelongsWideZoneRight && BelongsTop; }
+        }
 
-    public bool HasTrapDoor
-    {
-        get { return hasTrapDoor; }
+        public bool BelongsWideZoneBottomLeft
+        {
+            get { return BelongsWideZoneLeft && BelongsBottom; }
+        }
+
+        public bool BelongsWideZoneTopLeft
+        {
+            get { return BelongsWideZoneLeft && BelongsTop; }
+        }
+
+        public bool HasTrapDoor
+        {
+            get { return hasTrapDoor; }
+        }
     }
 }

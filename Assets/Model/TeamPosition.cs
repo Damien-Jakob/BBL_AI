@@ -1,4 +1,8 @@
-﻿public enum TeamPosition {
-    Bottom,
-    Top
+﻿namespace Assets.Model
+{
+    public enum TeamPosition
+    {
+        Bottom,
+        Top
+    }
 }

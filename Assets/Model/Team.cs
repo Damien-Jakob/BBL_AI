@@ -1,4 +1,7 @@
-﻿class Team
+﻿namespace Assets.Model
 {
+    class Team
+    {
 
+    }
 }
