@@ -80,15 +80,29 @@ public class PitchLocationController : MonoBehaviour
             }
         }
 
+
         if (pitchLocation.BelongsEndZone ||
             pitchLocation.Coordinates.y == 1 ||
+            pitchLocation.Coordinates.y == 12 ||
+            pitchLocation.Coordinates.y == 13 ||
             pitchLocation.Coordinates.y == 24)
         {
             groundDecorationTilemap2.SetTile(coordinates3d, lineTile);
             groundDecorationTilemap2.SetTileFlags(coordinates3d, TileFlags.None);
 
+            if (pitchLocation.BelongsEndZoneBottom ||
+                pitchLocation.Coordinates.y == 12 ||
+                pitchLocation.Coordinates.y == 24)
+            {
+                rotateTile(groundDecorationTilemap2, coordinates3d, 90);
+            }
+            else
+            {
+                rotateTile(groundDecorationTilemap2, coordinates3d, 270);
+            }
 
         }
+
 
         if (pitchLocation.HasTrapDoor)
         {
