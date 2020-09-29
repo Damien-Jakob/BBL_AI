@@ -4,10 +4,12 @@ namespace Assets.Model
 {
     public class PitchLocation
     {
+        protected Pitch pitch;
+        public Player Player { get; set; }
+
         protected readonly Vector2Int coordinates;
         protected readonly bool hasTrapDoor;
 
-        protected Pitch pitch;
 
         public PitchLocation(int x, int y, Pitch pitch)
         {
@@ -95,6 +97,12 @@ namespace Assets.Model
         public bool HasTrapDoor
         {
             get { return hasTrapDoor; }
+        }
+
+        public int DistanceTo(PitchLocation pitchLocation)
+        {
+            Vector2Int difference = Coordinates - pitchLocation.Coordinates;
+            return Mathf.Abs(difference.x) + Mathf.Abs(difference.y);
         }
     }
 }

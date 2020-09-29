@@ -22,4 +22,9 @@ public class PitchController : MonoBehaviour
             }
         }
     }
+
+    public Pitch Pitch { get
+        {
+            return pitch;
+        } }
 }

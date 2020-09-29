@@ -4,6 +4,9 @@ namespace Assets.Model
 {
     public class Pitch
     {
+        protected readonly PitchLocation[,] locations = new PitchLocation[Width, Height];
+        public PitchLocation BallLocation { get; set; }
+
         public static readonly int Width = 15;
         public static readonly int Height = 26;
         public static readonly int WideZoneWidth = 4;
@@ -14,8 +17,6 @@ namespace Assets.Model
 
         public static readonly Vector2Int TrapDoor1Location = new Vector2Int(1, 6);
         public static readonly Vector2Int TrapDoor2Location = new Vector2Int(13, 19);
-
-        protected readonly PitchLocation[,] locations = new PitchLocation[Width, Height];
 
         public Pitch()
         {
@@ -34,6 +35,12 @@ namespace Assets.Model
             {
                 return locations;
             }
+        }
+
+        public bool ValidateCoordonates(int x, int y)
+        {
+            return x >= 0 && x < Width
+                && y >= 0 && y < Width;
         }
     }
 }
