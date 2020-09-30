@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
         game.PutPlayer(player, 0, 3);
         game.PutBall(0, 1);
         ballController.Put(0, 1);
-        ballController.StartMovingTo(10, 10);
+        ballController.StartMovingTo(1, 2);
     }
 
     // Update is called once per frame
