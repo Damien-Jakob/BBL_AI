@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     {
         ballController = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
 
-
+        // Temp data
         Coach coach = new HumanCoach();
         Team team = new Team(coach);
         Player player = new Player(team);
@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
         game.PutPlayer(player, 0, 3);
         game.PutBall(0, 1);
         ballController.Put(0, 1);
+        ballController.StartMovingTo(10, 10);
     }
 
     // Update is called once per frame
