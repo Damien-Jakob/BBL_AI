@@ -8,6 +8,7 @@ TagManager:
   - GroundDecorationTilemap1
   - GroundDecorationTilemap2
   - Ball
+  - Pitch
   layers:
   - Default
   - TransparentFX

@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pitch
       objectReference: {fileID: 0}
+    - target: {fileID: 2031867319328957291, guid: bba353fffd6e8d34e9f84c3a47d34446,
+        type: 3}
+      propertyPath: m_TagString
+      value: Pitch
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bba353fffd6e8d34e9f84c3a47d34446, type: 3}
 --- !u!1 &505423303
