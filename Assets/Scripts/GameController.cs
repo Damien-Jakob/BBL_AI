@@ -6,9 +6,13 @@ public class GameController : MonoBehaviour
     Game game;
     BallController ballController;
 
+    GameObject playerPrefab;
+
     void Start()
     {
         ballController = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
+
+        playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
 
         // Temp data
         Coach coach = new HumanCoach();
@@ -31,7 +35,12 @@ public class GameController : MonoBehaviour
 
         foreach(Player player in team.Players)
         {
-            // TODO create player
+            GameObject playerRepresentation = Instantiate(playerPrefab);
+            PlayerController playerController = playerRepresentation.GetComponent<PlayerController>();
+            print(playerController);
+            playerController.Initialize(player);
+            
+            playerController.StartMovingTo(5, 5); 
         }
     }
 
