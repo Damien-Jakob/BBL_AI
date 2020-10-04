@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Assets.Model
 {
+    // TODO ball events
     public class Game
     {
         public Team Team { get; set; }
@@ -24,17 +25,29 @@ namespace Assets.Model
                 return false;
             }
 
-            PutPlayer(player, startingCoordinates.x + movementX, startingCoordinates.y);
+            PutPlayer(player, startingCoordinates.x + movementX, startingCoordinates.y, false);
+            player.OnMove.Invoke(player.PitchLocation.Coordinates);
+
             return true;
         }
 
-        public void PutPlayer(Player player, int destinationX, int destinationY)
+        protected void PutPlayer(Player player, int destinationX, int destinationY, bool sendEvent)
         {
-            if(player.PitchLocation != null)
+            if (player.PitchLocation != null)
             {
                 player.PitchLocation.Player = null;
             }
             player.PitchLocation = Pitch.Locations[destinationX, destinationY];
+
+            if(sendEvent)
+            {
+                player.OnPut.Invoke(player.PitchLocation.Coordinates);
+            }
+        }
+
+        public void PutPlayer(Player player, int destinationX, int destinationY)
+        {
+            PutPlayer(player, destinationX, destinationY, true);
         }
 
         public void PutBall(int destinationX, int destinationY)
