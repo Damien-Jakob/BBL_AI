@@ -5,7 +5,6 @@ namespace Assets.Model
     public class Pitch
     {
         protected readonly PitchLocation[,] locations = new PitchLocation[Width, Height];
-        public PitchLocation BallLocation { get; set; }
 
         public static readonly int Width = 15;
         public static readonly int Height = 26;

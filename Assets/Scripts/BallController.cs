@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    // TODO subscribe to ball game events
-    public void Initialize(Game game)
+    public void Initialize(Ball ball)
     {
         Movement movement = GetComponent<Movement>();
         movement.Initialize();
+        ball.OnPut.AddListener(movement.Put);
+        ball.OnMove.AddListener(movement.StartMovingTo);
     }
 }

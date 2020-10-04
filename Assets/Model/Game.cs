@@ -6,8 +6,16 @@ namespace Assets.Model
     // TODO ball events
     public class Game
     {
-        public Team Team { get; set; }
         public Pitch Pitch { get; set; }
+        public Team Team { get; set; }
+        public Ball Ball { get; set; }
+
+        public Game(Team team)
+        {
+            Pitch = new Pitch();
+            Ball = new Ball();
+            Team = team;
+        }
 
         public bool MovePlayer(Player player, int movementX)
         {
@@ -50,9 +58,17 @@ namespace Assets.Model
             PutPlayer(player, destinationX, destinationY, true);
         }
 
-        public void PutBall(int destinationX, int destinationY)
+        public void PutBall(Vector2Int destination)
         {
-            Pitch.BallLocation = Pitch.Locations[destinationX, destinationY];
+            Ball.PitchLocation = Pitch.Locations[destination.x, destination.y];
+            Ball.OnPut.Invoke(destination);
+        }
+
+        // TODO delete, just there for test
+        public void MoveBall(Vector2Int destination)
+        {
+            Ball.PitchLocation = Pitch.Locations[destination.x, destination.y];
+            Ball.OnMove.Invoke(destination);
         }
     }
 
