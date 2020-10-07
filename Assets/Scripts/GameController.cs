@@ -18,13 +18,13 @@ public class GameController : MonoBehaviour
         game = new Game(team);
 
 
-        // Initialize view
+        // Initialize View
         // Initialize Pitch
         GameObject.FindGameObjectWithTag("Pitch").GetComponent<PitchController>().Initialize(game.Pitch);
 
         // Initialize ball
         BallController ballController = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
-        ballController.Initialize(game.Ball);
+        ballController.Initialize(game.Pitch.Ball);
 
         // Initialize players
         GameObject playerPrefab = Resources.Load<GameObject>("Prefabs/Player");

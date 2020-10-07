@@ -8,12 +8,10 @@ namespace Assets.Model
     {
         public Pitch Pitch { get; set; }
         public Team Team { get; set; }
-        public Ball Ball { get; set; }
 
         public Game(Team team)
         {
             Pitch = new Pitch();
-            Ball = new Ball();
             Team = team;
         }
 
@@ -60,15 +58,15 @@ namespace Assets.Model
 
         public void PutBall(Vector2Int destination)
         {
-            Ball.PitchLocation = Pitch.Locations[destination.x, destination.y];
-            Ball.OnPut.Invoke(destination);
+            Pitch.Ball.PitchLocation = Pitch.Locations[destination.x, destination.y];
+            Pitch.Ball.OnPut.Invoke(destination);
         }
 
-        // TODO delete, just there for test
+        // TODO set protected once it has been tested
         public void MoveBall(Vector2Int destination)
         {
-            Ball.PitchLocation = Pitch.Locations[destination.x, destination.y];
-            Ball.OnMove.Invoke(destination);
+            Pitch.Ball.PitchLocation = Pitch.Locations[destination.x, destination.y];
+            Pitch.Ball.OnMove.Invoke(destination);
         }
     }
 
