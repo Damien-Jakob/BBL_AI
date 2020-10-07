@@ -34,14 +34,14 @@ public class GameController : MonoBehaviour
             playerController.Initialize(player);
         }
 
+
         // Test Player Movement
         game.PutPlayer(testplayer1, 0, 3);
         game.PutPlayer(testplayer2, 10, 10);
-        game.MovePlayer(testplayer1, 1, 1);
-        game.MovePlayer(testplayer2, -1, -1);
-        // Test Ball Movement
-        game.PutBall(new Vector2Int(2, 2));
-        game.MoveBall(new Vector2Int(7, 7));
+        game.PutBall(new Vector2Int(10, 10));
+
+        game.MovePlayerAction(testplayer1, 1, 1);
+        game.MovePlayerAction(testplayer2, -1, -1);        
     }
 
     // Update is called once per frame

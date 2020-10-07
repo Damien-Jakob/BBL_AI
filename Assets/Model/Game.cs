@@ -14,7 +14,7 @@ namespace Assets.Model
             Team = team;
         }
 
-        public bool MovePlayer(Player player, int movementX, int movementY)
+        public bool MovePlayerAction(Player player, int movementX, int movementY)
         {
             // Invalid movement
             if (movementX > 1 || movementX < -1
@@ -39,9 +39,12 @@ namespace Assets.Model
                 return false;
             }
 
-            PutPlayer(player, destinationX, destinationY, false);
-            player.OnMove.Invoke(player.PitchLocation.Coordinates);
-
+            bool hasBall = player.HasBall;
+            MovePlayer(player, destinationX, destinationY);
+            if(hasBall)
+            {
+                MoveBall(player.PitchLocation.Coordinates);
+            }
             return true;
         }
 
@@ -62,6 +65,12 @@ namespace Assets.Model
         public void PutPlayer(Player player, int destinationX, int destinationY)
         {
             PutPlayer(player, destinationX, destinationY, true);
+        }
+
+        protected void MovePlayer(Player player, int destinationX, int destinationY)
+        {
+            PutPlayer(player, destinationX, destinationY, false);
+            player.OnMove.Invoke(player.PitchLocation.Coordinates);
         }
 
         public void PutBall(Vector2Int destination)

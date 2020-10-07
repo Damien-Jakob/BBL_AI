@@ -4,7 +4,7 @@ namespace Assets.Model
 {
     public class PitchLocation
     {
-        protected Pitch pitch;
+        public Pitch Pitch { get; protected set; }
         public Player Player { get; set; }
 
         protected readonly Vector2Int coordinates;
@@ -16,7 +16,7 @@ namespace Assets.Model
             coordinates = new Vector2Int(x, y);
             hasTrapDoor = (coordinates == Pitch.TrapDoor1Location)
                 || (coordinates == Pitch.TrapDoor2Location);
-            this.pitch = pitch;
+            Pitch = pitch;
         }
 
         public Vector2Int Coordinates
