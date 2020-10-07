@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    Game game;
+    public Game Game { get; protected set; }
 
     void Start()
     {
@@ -15,33 +15,34 @@ public class GameController : MonoBehaviour
         Player testplayer2 = new Player(team);
 
         // Initialize Game
-        game = new Game(team);
+        Game = new Game(team);
 
         // Initialize View
         // Initialize Pitch
-        GameObject.FindGameObjectWithTag("Pitch").GetComponent<PitchController>().Initialize(game.Pitch);
+        GameObject.FindGameObjectWithTag("Pitch").GetComponent<PitchController>().Initialize(Game.Pitch);
 
         // Initialize ball
         BallController ballController = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
-        ballController.Initialize(game.Pitch.Ball);
+        ballController.Initialize(Game.Pitch.Ball);
 
         // Initialize players
         GameObject playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        foreach(Player player in team.Players)
+        foreach (Player player in team.Players)
         {
             GameObject playerRepresentation = Instantiate(playerPrefab);
             PlayerController playerController = playerRepresentation.GetComponent<PlayerController>();
             playerController.Initialize(player);
         }
 
-
         // Test Player Movement
-        game.PutPlayer(testplayer1, 0, 3);
-        game.PutPlayer(testplayer2, 10, 10);
-        game.PutBall(new Vector2Int(10, 10));
+        Game.PutPlayer(testplayer1, 0, 3);
+        Game.PutPlayer(testplayer2, 10, 10);
+        Game.PutBall(5, 5);
 
-        game.MovePlayerAction(testplayer1, 1, 1);
-        game.MovePlayerAction(testplayer2, -1, -1);        
+        Game.SetActivePlayerAction(testplayer1);
+        Game.MovePlayerAction(1, 1);
+        Game.SetActivePlayerAction(testplayer2);
+        Game.MovePlayerAction(-1, -1);
     }
 
     // Update is called once per frame

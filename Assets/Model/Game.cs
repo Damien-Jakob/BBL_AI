@@ -8,13 +8,45 @@ namespace Assets.Model
         public Pitch Pitch { get; set; }
         public Team Team { get; set; }
 
+        protected Player activePlayer;
+        public Player ActivePlayer
+        {
+            get
+            {
+                return activePlayer;
+            }
+
+            protected set
+            {
+                if(ActivePlayer != value)
+                {
+                    if(ActivePlayer != null)
+                    {
+                        ActivePlayer.OnSetInactive.Invoke();
+                    }
+                    activePlayer = value;
+                    OnSetActivePlayer.Invoke(ActivePlayer);
+                    ActivePlayer.OnSetActive.Invoke();
+                }
+            }
+        }
+
+        public EventSelectPlayer OnSetActivePlayer { get; protected set; }
+
         public Game(Team team)
         {
             Pitch = new Pitch();
             Team = team;
+
+            OnSetActivePlayer = new EventSelectPlayer();
         }
 
-        public bool MovePlayerAction(Player player, int movementX, int movementY)
+        public void SetActivePlayerAction(Player player)
+        {
+            ActivePlayer = player;
+        }
+
+        public bool MovePlayerAction(int movementX, int movementY)
         {
             // Invalid movement
             if (movementX > 1 || movementX < -1
@@ -29,7 +61,7 @@ namespace Assets.Model
                 return false;
             }
 
-            Vector2Int startingCoordinates = player.PitchLocation.Coordinates;
+            Vector2Int startingCoordinates = ActivePlayer.PitchLocation.Coordinates;
             int destinationX = startingCoordinates.x + movementX;
             int destinationY = startingCoordinates.y + movementY;
 
@@ -39,11 +71,11 @@ namespace Assets.Model
                 return false;
             }
 
-            bool hasBall = player.HasBall;
-            MovePlayer(player, destinationX, destinationY);
+            bool hasBall = ActivePlayer.HasBall;
+            MovePlayer(ActivePlayer, destinationX, destinationY);
             if(hasBall)
             {
-                MoveBall(player.PitchLocation.Coordinates);
+                MoveBall(ActivePlayer.PitchLocation.Coordinates);
             }
             return true;
         }
@@ -73,10 +105,10 @@ namespace Assets.Model
             player.OnMove.Invoke(player.PitchLocation.Coordinates);
         }
 
-        public void PutBall(Vector2Int destination)
+        public void PutBall(int destinationX, int destinationY)
         {
-            Pitch.Ball.PitchLocation = Pitch.Locations[destination.x, destination.y];
-            Pitch.Ball.OnPut.Invoke(destination);
+            Pitch.Ball.PitchLocation = Pitch.Locations[destinationX, destinationY];
+            Pitch.Ball.OnPut.Invoke(Pitch.Ball.PitchLocation.Coordinates);
         }
 
         // TODO set protected once it has been tested
