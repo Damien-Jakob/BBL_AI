@@ -17,7 +17,6 @@ public class GameController : MonoBehaviour
         // Initialize Game
         game = new Game(team);
 
-
         // Initialize View
         // Initialize Pitch
         GameObject.FindGameObjectWithTag("Pitch").GetComponent<PitchController>().Initialize(game.Pitch);
@@ -38,8 +37,8 @@ public class GameController : MonoBehaviour
         // Test Player Movement
         game.PutPlayer(testplayer1, 0, 3);
         game.PutPlayer(testplayer2, 10, 10);
-        game.MovePlayer(testplayer1, 1);
-        game.MovePlayer(testplayer2, -1);
+        game.MovePlayer(testplayer1, 1, 1);
+        game.MovePlayer(testplayer2, -1, -1);
         // Test Ball Movement
         game.PutBall(new Vector2Int(2, 2));
         game.MoveBall(new Vector2Int(7, 7));

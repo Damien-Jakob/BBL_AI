@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Assets.Model
 {
-    // TODO ball events
     public class Game
     {
         public Pitch Pitch { get; set; }
@@ -15,23 +14,32 @@ namespace Assets.Model
             Team = team;
         }
 
-        public bool MovePlayer(Player player, int movementX)
+        public bool MovePlayer(Player player, int movementX, int movementY)
         {
-            if (movementX > 1 || movementX < -1)
+            // Invalid movement
+            if (movementX > 1 || movementX < -1
+                || movementY > 1 || movementY < -1)
             {
                 throw new TooBigMovementException();
             }
 
+            // Useless movement
+            if (movementX == 0 && movementY == 0)
+            {
+                return false;
+            }
+
             Vector2Int startingCoordinates = player.PitchLocation.Coordinates;
             int destinationX = startingCoordinates.x + movementX;
-            int destinationY = startingCoordinates.y;
+            int destinationY = startingCoordinates.y + movementY;
 
+            // Invalid destination
             if (!Pitch.ValidateCoordonates(destinationX, destinationY))
             {
                 return false;
             }
 
-            PutPlayer(player, startingCoordinates.x + movementX, startingCoordinates.y, false);
+            PutPlayer(player, destinationX, destinationY, false);
             player.OnMove.Invoke(player.PitchLocation.Coordinates);
 
             return true;
@@ -45,7 +53,7 @@ namespace Assets.Model
             }
             player.PitchLocation = Pitch.Locations[destinationX, destinationY];
 
-            if(sendEvent)
+            if (sendEvent)
             {
                 player.OnPut.Invoke(player.PitchLocation.Coordinates);
             }
